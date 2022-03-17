@@ -40,6 +40,7 @@ export declare class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixi
     enableSearch: boolean;
     searchPlaceholder: string;
     describedBy: string;
+    noAreaCodeWithDialCode: boolean;
     get format(): PhoneNumberFormat;
     set format(value: PhoneNumberFormat);
     matMenu: MatMenu;
@@ -92,7 +93,7 @@ export declare class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixi
     private get formattedPhoneNumber();
     private formatAsYouTypeIfEnabled;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgxMatIntlTelInputComponent, [null, null, null, null, { optional: true; self: true; }, { optional: true; }, { optional: true; }, null]>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NgxMatIntlTelInputComponent, "ngx-mat-intl-tel-input", never, { "preferredCountries": "preferredCountries"; "enablePlaceholder": "enablePlaceholder"; "inputPlaceholder": "inputPlaceholder"; "cssClass": "cssClass"; "name": "name"; "onlyCountries": "onlyCountries"; "errorStateMatcher": "errorStateMatcher"; "enableSearch": "enableSearch"; "searchPlaceholder": "searchPlaceholder"; "describedBy": "describedBy"; "format": "format"; "placeholder": "placeholder"; "required": "required"; "disabled": "disabled"; "readonly": "readonly"; }, { "countryChanged": "countryChanged"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NgxMatIntlTelInputComponent, "ngx-mat-intl-tel-input", never, { "preferredCountries": "preferredCountries"; "enablePlaceholder": "enablePlaceholder"; "inputPlaceholder": "inputPlaceholder"; "cssClass": "cssClass"; "name": "name"; "onlyCountries": "onlyCountries"; "errorStateMatcher": "errorStateMatcher"; "enableSearch": "enableSearch"; "searchPlaceholder": "searchPlaceholder"; "describedBy": "describedBy"; "noAreaCodeWithDialCode": "noAreaCodeWithDialCode"; "format": "format"; "placeholder": "placeholder"; "required": "required"; "disabled": "disabled"; "readonly": "readonly"; }, { "countryChanged": "countryChanged"; }, never, never>;
 }
 export {};
 //# sourceMappingURL=ngx-mat-intl-tel-input.component.d.ts.map
