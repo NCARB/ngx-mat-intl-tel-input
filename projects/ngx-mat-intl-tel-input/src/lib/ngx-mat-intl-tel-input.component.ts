@@ -78,6 +78,7 @@ export class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase
   @Input() enableSearch = false;
   @Input() searchPlaceholder: string;
   @Input() describedBy = '';
+  @Input() noAreaCodeWithDialCode = false;
 
   @Input()
   get format(): PhoneNumberFormat {
@@ -240,6 +241,7 @@ export class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase
         name: c[0].toString(),
         iso2: c[1].toString(),
         dialCode: c[2].toString(),
+        dialCodeWithoutAreaCode: +c[2] > 1000 ? c[2].toString()[0] : c[2].toString(),
         priority: +c[3] || 0,
         areaCodes: c[4] as string[] || undefined,
         flagClass: c[1].toString().toUpperCase(),
