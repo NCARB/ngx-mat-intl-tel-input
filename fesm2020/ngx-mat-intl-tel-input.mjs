@@ -857,7 +857,10 @@ class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase {
         if (this.format === 'default') {
             return;
         }
-        const asYouType = new AsYouType(this.selectedCountry.iso2.toUpperCase());
+        const asYouType = new AsYouType({
+            defaultCountry: this.selectedCountry.iso2.toUpperCase(),
+            defaultCallingCode: this.noAreaCodeWithDialCode ? this.selectedCountry.dialCodeWithoutAreaCode : null,
+        });
         // To avoid caret positioning we apply formatting only if the caret is at the end:
         if (this.phoneNumber.toString().startsWith(this.previousFormattedNumber || '')) {
             this.phoneNumber = asYouType.input(this.phoneNumber.toString());
@@ -988,4 +991,3 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.0", ngImpor
  */
 
 export { NgxMatIntlTelInputComponent, NgxMatIntlTelInputModule, NgxMatIntlTelInputService };
-//# sourceMappingURL=ngx-mat-intl-tel-input.mjs.map
