@@ -5,13 +5,14 @@
     [matMenuTriggerFor]="menu"
     class="country-selector"
     [disabled]="disabled"
+    [class.no-pointer-events]="readonly"
   >
     <span
       class="country-selector-flag flag"
       [ngClass]="selectedCountry.flagClass"
     ></span>
     <span class="country-selector-code" *ngIf="selectedCountry?.dialCode"
-      >+{{ selectedCountry.dialCode }}</span
+      >+{{ noAreaCodeWithDialCode && selectedCountry.dialCodeWithoutAreaCode || selectedCountry.dialCode }}</span
     >
   </button>
   <mat-menu #menu="matMenu">
@@ -51,7 +52,7 @@
           <div class="flag" [ngClass]="country.flagClass"></div>
         </div>
         <div class="label-wrapper">
-          {{ country.name }} +{{ country.dialCode }}
+          {{ country.name }} +{{ noAreaCodeWithDialCode && country.dialCodeWithoutAreaCode || country.dialCode }}
         </div>
       </button>
     </ng-container>
@@ -69,6 +70,7 @@
     [errorStateMatcher]="errorStateMatcher"
     [placeholder]="inputPlaceholder"
     [disabled]="disabled"
+    [readonly]="readonly"
     [aria-describedby]="describedBy"
     #focusable
   />

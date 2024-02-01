@@ -78,6 +78,7 @@ export class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase
   @Input() enableSearch = false;
   @Input() searchPlaceholder: string;
   @Input() describedBy = '';
+  @Input() noAreaCodeWithDialCode = false;
 
   @Input()
   get format(): PhoneNumberFormat {
@@ -94,6 +95,7 @@ export class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase
   private _placeholder: string;
   private _required = false;
   private _disabled = false;
+  private _readonly = false;
   stateChanges = new Subject<void>();
   focused = false;
   @HostBinding() id = `ngx-mat-intl-tel-input-${NgxMatIntlTelInputComponent.nextId++}`;
@@ -240,6 +242,7 @@ export class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase
         name: c[0].toString(),
         iso2: c[1].toString(),
         dialCode: c[2].toString(),
+        dialCodeWithoutAreaCode: +c[2] > 1000 ? c[2].toString()[0] : c[2].toString(),
         priority: +c[3] || 0,
         areaCodes: c[4] as string[] || undefined,
         flagClass: c[1].toString().toUpperCase(),
@@ -337,6 +340,16 @@ export class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase
     this.stateChanges.next();
   }
 
+  @Input()
+  get readonly(): boolean {
+    return this._readonly;
+  }
+
+  set readonly(value: boolean) {
+    this._readonly = coerceBooleanProperty(value);
+    this.stateChanges.next();
+  }
+
   setDescribedByIds(ids: string[]) {
     this.describedBy = ids.join(' ');
   }
@@ -379,7 +392,10 @@ export class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase
     if (this.format === 'default') {
       return;
     }
-    const asYouType: AsYouType = new AsYouType(this.selectedCountry.iso2.toUpperCase() as CC);
+    const asYouType: AsYouType = new AsYouType({
+      defaultCountry: this.selectedCountry.iso2.toUpperCase() as CC,
+      defaultCallingCode: this.noAreaCodeWithDialCode ? this.selectedCountry.dialCodeWithoutAreaCode : null,
+    });
     // To avoid caret positioning we apply formatting only if the caret is at the end:
     if (this.phoneNumber.toString().startsWith(this.previousFormattedNumber || '')) {
       this.phoneNumber = asYouType.input(this.phoneNumber.toString());
